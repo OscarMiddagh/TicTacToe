@@ -1,30 +1,23 @@
 package tictactoe.frontend;
 
 import tictactoe.backend.ITicTacToe;
-import tictactoe.backend.ITicTacToeObservable;
+import tictactoe.controller.IObservable;
 import tictactoe.controller.IObserver;
 import tictactoe.controller.MyEvent;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 
 public class GUI extends JFrame implements ITicTacToeUI, IObserver {
     private final ITicTacToe game;
     private final Helper helper;
-    private final ITicTacToeObservable gameObservable;
+    private final IObservable gameObservable;
     private JButton[] button;
     private JLabel labelTurn;
 
     public GUI(ITicTacToe game) {
         this.game = game;
-        gameObservable = (ITicTacToeObservable) game;
+        gameObservable = (IObservable) game;
         gameObservable.addListener(this);
         helper = new Helper();
     }

@@ -1,16 +1,16 @@
 package tictactoe.frontend;
 
 import tictactoe.backend.ITicTacToe;
-import tictactoe.backend.ITicTacToeObservable;
+import tictactoe.controller.IObservable;
 import tictactoe.controller.IObserver;
 import tictactoe.controller.MyEvent;
 
 public class ConsoleTicTacToe extends Console implements IObserver {
-    private ITicTacToeObservable gameObservable;
+    private IObservable gameObservable;
     public ConsoleTicTacToe(ITicTacToe game) {
         super(game);
-        gameObservable = (ITicTacToeObservable) game; // Si no fuera de esta manera tendriamos que llamar
-                                                      //especificamente a TicTacToe ya no a su interfaz
+        gameObservable = (IObservable) game; // Si no fuera de esta manera tendriamos que llamar
+                                             //especificamente a TicTacToe ya no a su interfaz
         gameObservable.addListener(this);
     }
     @Override

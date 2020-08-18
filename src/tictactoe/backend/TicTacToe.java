@@ -1,11 +1,12 @@
 package tictactoe.backend;
 
+import tictactoe.controller.IObservable;
 import tictactoe.controller.MyEvent;
 import tictactoe.controller.IObserver;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicTacToe implements ITicTacToeObservable {
+public class TicTacToe implements ITicTacToe, IObservable {
     private final char[][] board;
     private final int dimension;
     private final List<IObserver> support;
