@@ -3,8 +3,8 @@ package tictactoe.frontend;
 import tictactoe.backend.ITicTacToe;
 
 public class Console implements ITicTacToeUI {
-    protected final ITicTacToe game;
-    protected final Helper helper;
+    protected ITicTacToe game;
+    protected Helper helper;
     protected String piece;
 
     public Console(ITicTacToe game) {
@@ -19,14 +19,14 @@ public class Console implements ITicTacToeUI {
         play();
     }
 
-    private void play() {
+    protected void play() {
         setLabelsMessagesOptionsInit();
         while (true) {
             movePlayer();
         }
     }
 
-    private void setLabelsGameInit(){
+    protected void setLabelsGameInit(){
         System.out.println();
         System.out.println(helper.colorYellow() + "\n ----------- TIC TAC TOE 1.0 ----------- \n" + helper.resetColor());
     }
@@ -57,11 +57,13 @@ public class Console implements ITicTacToeUI {
         }
     }
 
+
     protected void showBoardGame() {
         char[][] boardPlay = game.getBoard();
         System.out.println();
         for (int i = 0; i < boardPlay.length; i++) {
             char[] chars = boardPlay[i];
+            System.out.print(helper.resetColor()+i);
             for (int j = 0; j < boardPlay.length; j++) {
                 char box = chars[j];
                 if (box == 'X') {
@@ -78,8 +80,31 @@ public class Console implements ITicTacToeUI {
         }
         System.out.println();
     }
-
-
+    protected void checkStatusGame(){
+        if(game.checkTicTacToe()){
+            String winner = String.valueOf(game.winner());
+            System.out.println(helper.messageWinnerGame(winner) + "\n");
+            starSubMenu();
+        }else{
+            if (game.draw()){
+                System.out.println(helper.messageDrawGame() + "\n");
+                starSubMenu();
+            }else{
+                System.out.print("- enter the play number " + piece + " : ");
+            }
+        }
+    }
+    protected void changeLabelTurn(){
+        if(piece.equals("X")){
+            piece = "O";
+        }else{
+            piece = "X";
+        }
+    }
+    protected void starSubMenu() {
+        System.out.println(helper.colorGreen() + "> Press 10 new game \n> Press 11 to the exit game" + helper.resetColor() + "\n");
+        System.out.print("- enter the option: ");
+    }
     private int convertRow(int number){
         return (number - 1) / 3;
     }

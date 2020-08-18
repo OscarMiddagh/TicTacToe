@@ -26,31 +26,4 @@ public class ConsoleTicTacToe extends Console implements IObserver {
 
     }
 
-    private void changeLabelTurn(){
-        if(piece.equals("X")){
-            piece = "O";
-        }else{
-            piece = "X";
-        }
-    }
-    private void checkStatusGame(){
-        if(game.checkTicTacToe()){
-            String winner = String.valueOf(game.winner());
-            System.out.println(helper.messageWinnerGame(winner) + "\n");
-            starSubMenu();
-        }else{
-            if (game.draw()){
-                System.out.println(helper.messageDrawGame() + "\n");
-                starSubMenu();
-            }else{
-                System.out.print("- enter the play number " + piece + " : ");
-            }
-        }
-    }
-
-    private void starSubMenu() {
-        System.out.println(helper.colorGreen() + "> Press 10 new game \n> Press 11 to the exit game" + helper.resetColor() + "\n");
-        System.out.print("- enter the option: ");
-    }
-
 }
