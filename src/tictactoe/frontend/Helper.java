@@ -7,7 +7,7 @@ public class Helper {
     protected Scanner sc;
 
     public Helper() {
-        sc = null;
+        sc = new Scanner(System.in);
     }
     protected void input(){
         sc = new Scanner(System.in);
@@ -36,6 +36,11 @@ public class Helper {
             }
         }while (number < 0 || number > max);
         return number;
+    }
+    public String enterString(){
+        input();
+        String res = sc.nextLine();
+        return res;
     }
     public String colorRed(){ return "\033[31m"; }
 

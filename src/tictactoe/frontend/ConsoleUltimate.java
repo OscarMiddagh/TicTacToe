@@ -23,7 +23,8 @@ public class ConsoleUltimate implements ITicTacToeUI {
         System.out.println(" 1.- Input Console \n 2.- Input File");
         int number = helper.enterNumber(2, "play number");
         if(number == 2){
-            helper = new HelperFile();
+            String routeFile = helper.enterString();
+            helper = new HelperFile(routeFile);
         }
     }
 
