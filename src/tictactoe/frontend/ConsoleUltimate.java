@@ -3,70 +3,45 @@ package tictactoe.frontend;
 import tictactoe.backend.ITicTacToe;
 
 public class ConsoleUltimate extends Console{
-    private final ITicTacToe game;
-    private Helper helper;
-    private String piece;
-
     public ConsoleUltimate(ITicTacToe game) {
         super(game);
-        this.game = game;
-        helper = new Helper();
-        piece = "X";
     }
-    @Override
-    public void run(){
-        setLabelsGameInit();
-        play();
+    protected void setNewGameNum() {
+        newGame = 100;
     }
-    private void selectTypeInputMarkMove(){
-        System.out.println(" 1.- Input Console \n 2.- Input File");
-        int number = helper.enterNumber(2, "play number");
-        if(number == 2){
-            String routeFile = helper.enterString();
-            helper = new HelperFile(routeFile);
-        }
+    protected void setExitNum(){
+        exit = 111;
     }
-    protected void setLabelsGameInit(){
-        System.out.println();
-        System.out.println(helper.colorYellow() + "\n ----------- TIC TAC TOE 1.0 ----------- \n" + helper.resetColor());
-        selectTypeInputMarkMove();
-    }
-    protected void setLabelsMessagesOptionsInit(){
-        piece = "X";
-        System.out.println(helper.colorBlue() + "\n\nChoose a number from 1 to 9 for play" + helper.resetColor());
-        System.out.println(helper.colorGreen() + "> Press 100 new game \n> Press 111 to the exit game" + helper.resetColor());
-        System.out.print(helper.resetColor()+"- enter the play number " + piece + " : ");
-    }
-
     protected void movePlayer(){
-        int row = helper.enterNumber(111, "play number");
-        if (row == 100){
+        System.out.println("Row:");
+        int row = helper.enterNumber(exit, "play number");
+        if (row == newGame){
             game.create();
         }else{
-            if (row == 111){
-                System.out.println(helper.messageFinishGame());
-                System.exit(0);
-            }else {
-                inputColumn(row);
-            }
+            exitOptionChoose(row);
+        }
+    }
+    protected void exitOptionChoose(int row){
+        if (row == exit){
+            System.out.println(helper.messageFinishGame());
+            System.exit(0);
+        }else {
+            inputColumn(row);
         }
     }
     private void inputColumn(int row){
-        int column = helper.enterNumber(111, "play number");
-        if (column == 100){
+        System.out.println("Column:");
+        int column = helper.enterNumber(exit, "play number");
+        if (column == newGame){
             game.create();
         }else {
-            if (column == 111) {
+            if (column == exit) {
                 System.out.println(helper.messageFinishGame());
                 System.exit(0);
             }else {
-                inputComplete(row,column);
+                inputComplete(row-1,column-1);
             }
         }
-    }
-    protected void starSubMenu() {
-        System.out.println(helper.colorGreen() + "> Press 100 new game \n> Press 111 to the exit game" + helper.resetColor() + "\n");
-        System.out.print("- enter the option: ");
     }
     private void inputComplete(int row, int column){
         if (!game.markMove(row,column)){

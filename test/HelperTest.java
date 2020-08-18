@@ -13,6 +13,7 @@ public class HelperTest {
     @Before
     public void setUp(){
        helper = new Helper();
+       //helper = new HelperFile("test.txt");
     }
 
     @After
