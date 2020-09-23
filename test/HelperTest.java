@@ -3,6 +3,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import tictactoe.frontend.Helper;
+import tictactoe.frontend.HelperFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -12,8 +13,8 @@ public class HelperTest {
     private Helper helper;
     @Before
     public void setUp(){
-       helper = new Helper();
-       //helper = new HelperFile("test.txt");
+       //helper = new Helper();
+       helper = new HelperFile("test.txt");
     }
 
     @After
